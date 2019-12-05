@@ -29,6 +29,18 @@ class TreeNode(object):
             prev.right = newnode
         return root
 
+    def search(self, root, key):
+        curr = root
+        while curr is not None:
+            if key == curr.key:
+                return curr
+            elif key < curr.key:
+                curr = curr.left
+            else:
+                curr = curr.right
+
+        return None  # Key not found!
+
     def display(self, node):
         # curr = root
         if node is None:
@@ -41,9 +53,26 @@ class TreeNode(object):
 if __name__ == "__main__":
     # print("in main!")
     tn = TreeNode(random.randint(0, 100))
+    input = []
     for i in range(10):
-        key = random.randint(0, 100)
-        print("inserting key {}".format(key))
+        input.append(random.randint(0, 100))
+    print("input keys = {}".format(input))
+    for key in input:
+        # print("inserting key {}".format(key))
         tn.insert(tn, key)
     # pdb.set_trace()
     tn.display(tn)
+
+    searchfor = random.choice(input)
+    found = tn.search(tn, searchfor)
+    if found:
+        print("found {} in the tree".format(searchfor))
+    else:
+        print("{} not found in the tree!".format(searchfor))
+
+    searchfor = random.randint(101, 200)
+    found = tn.search(tn, searchfor)
+    if found:
+        print("found {} in the tree".format(searchfor))
+    else:
+        print("{} not found in the tree!".format(searchfor))
