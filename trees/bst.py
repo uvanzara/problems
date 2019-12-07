@@ -49,6 +49,22 @@ class TreeNode(object):
         self.display(node.left)
         self.display(node.right)
 
+    def findmin(self, root):
+        if root is None:
+            return None
+        curr = root
+        while curr.left is not None:
+            curr = curr.left
+        return curr.key
+
+    def findmax(self, root):
+        if root is None:
+            return None
+        curr = root
+        while curr.right is not None:
+            curr = curr.right
+        return curr.key
+
 
 if __name__ == "__main__":
     # print("in main!")
@@ -76,3 +92,6 @@ if __name__ == "__main__":
         print("found {} in the tree".format(searchfor))
     else:
         print("{} not found in the tree!".format(searchfor))
+
+    print("min element in tree is {}".format(tn.findmin(tn)))
+    print("max element in tree is {}".format(tn.findmax(tn)))
