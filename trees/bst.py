@@ -41,13 +41,26 @@ class TreeNode(object):
 
         return None  # Key not found!
 
-    def display(self, node):
-        # curr = root
+    def display_pre_order(self, node):
         if node is None:
             return
         print("key = {}".format(node.key))
-        self.display(node.left)
-        self.display(node.right)
+        self.display_pre_order(node.left)
+        self.display_pre_order(node.right)
+
+    def display_in_order(self, node):
+        if node is None:
+            return
+        self.display_in_order(node.left)
+        print("key = {}".format(node.key))
+        self.display_in_order(node.right)
+
+    def display_post_order(self, node):
+        if node is None:
+            return
+        self.display_post_order(node.left)
+        self.display_post_order(node.right)
+        print("key = {}".format(node.key))
 
     def findmin(self, root):
         if root is None:
@@ -77,7 +90,12 @@ if __name__ == "__main__":
         # print("inserting key {}".format(key))
         tn.insert(tn, key)
     # pdb.set_trace()
-    tn.display(tn)
+    print("Pre-order traversal")
+    tn.display_pre_order(tn)
+    print("In-order traversal")
+    tn.display_in_order(tn)
+    print("Post-order traversal")
+    tn.display_post_order(tn)
 
     searchfor = random.choice(input)
     found = tn.search(tn, searchfor)
@@ -95,3 +113,4 @@ if __name__ == "__main__":
 
     print("min element in tree is {}".format(tn.findmin(tn)))
     print("max element in tree is {}".format(tn.findmax(tn)))
+
